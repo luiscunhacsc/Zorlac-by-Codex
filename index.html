@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortress of Zorlac</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <main class="layout">
+    <section id="gamePanel" class="game-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ZX81 reimagined</p>
+          <h1>Fortress of Zorlac</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="fullscreenButton" class="ghost-button" type="button">Full Screen</button>
+          <button id="pauseButton" class="ghost-button" type="button">Pause</button>
+          <button id="soundButton" class="ghost-button" type="button" aria-pressed="true">Sound: On</button>
+        </div>
+      </header>
+
+      <div class="hud" aria-live="polite">
+        <div class="hud-card">
+          <span class="hud-label">Score</span>
+          <strong id="scoreValue">0</strong>
+        </div>
+        <div class="hud-card">
+          <span class="hud-label">Wave</span>
+          <strong id="waveValue">1</strong>
+        </div>
+        <div class="hud-card">
+          <span class="hud-label">Ships</span>
+          <strong id="livesValue">5</strong>
+        </div>
+        <div class="hud-card">
+          <span class="hud-label">Range</span>
+          <strong id="multiplierValue">x1.00</strong>
+        </div>
+        <div class="hud-card hud-status">
+          <span class="hud-label">Status</span>
+          <strong id="statusValue">Stand by</strong>
+        </div>
+      </div>
+
+      <div class="canvas-shell">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="Fortress of Zorlac game area"></canvas>
+        <div id="overlay" class="overlay">
+          <div class="overlay-card">
+            <p class="eyebrow" id="overlayEyebrow">Choose your start</p>
+            <h2 id="overlayTitle">Fortress of Zorlac</h2>
+            <p id="overlayText">Pick the level to begin on. Higher starting levels are worth more points.</p>
+            <form id="launchForm" class="launch-form">
+              <label>
+                Starting level
+                <input id="levelInput" name="level" type="number" min="1" max="12" step="1" value="1" inputmode="numeric">
+              </label>
+              <label id="callsignRow" class="callsign-row" hidden>
+                Leaderboard name
+                <input id="callsignInput" name="callsign" type="text" maxlength="10" autocomplete="nickname" value="ACE">
+              </label>
+              <button id="startButton" class="launch-button" type="submit">Start Assault</button>
+            </form>
+            <p class="controls-copy">
+              Move with <kbd>WASD</kbd> or <kbd>arrows</kbd>, fire straight ahead with <kbd>space</kbd> or click, pause with <kbd>P</kbd>.
+            </p>
+            <section id="overlayLeaderboardWrap" class="overlay-leaderboard" hidden>
+              <p class="eyebrow">Persistent leaderboard</p>
+              <ol id="overlayLeaderboardList" class="leaderboard leaderboard-compact"></ol>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-controls" aria-label="Touch controls">
+        <div class="dpad">
+          <button class="touch-button" data-key="ArrowUp" type="button">Up</button>
+          <button class="touch-button" data-key="ArrowLeft" type="button">Left</button>
+          <button class="touch-button" data-key="ArrowDown" type="button">Down</button>
+          <button class="touch-button" data-key="ArrowRight" type="button">Right</button>
+        </div>
+        <button class="touch-button touch-fire" data-key="Space" type="button">Fire</button>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <section class="info-card">
+        <p class="eyebrow">Pilot log</p>
+        <h2>Scoring</h2>
+        <p>Higher starting levels launch you deeper into the assault and increase the value of each successful shot and Zorlac hit.</p>
+        <ul class="feature-list">
+          <li>Persistent local leaderboard</li>
+          <li>Fullscreen launch and larger play area</li>
+          <li>Escalating wave speed and pressure</li>
+          <li>Touch-safe controls for smaller screens</li>
+        </ul>
+      </section>
+
+      <section class="info-card">
+        <p class="eyebrow">Top pilots</p>
+        <h2>Leaderboard</h2>
+        <ol id="leaderboardList" class="leaderboard"></ol>
+      </section>
+    </aside>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
